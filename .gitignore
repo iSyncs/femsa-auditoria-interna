@@ -1,0 +1,29 @@
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Dependencies/build outputs
+node_modules/
+dist/
+build/
+.next/
+coverage/
+
+# Logs
+*.log
+
+# Configuración local de Claude Code
+.claude/
+
+# Vercel CLI
+.vercel/
+.env.local
+
+# Renders de Remotion (el master 4K no va al repo)
+video/out/

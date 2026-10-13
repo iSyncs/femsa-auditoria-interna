@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* ================= Design System FEMSA (tokens de Tailwind v4) =================
+   Tomados de mockup-html/styles.css para una traslación fiel del mockup aprobado. */
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-brand: #ea1d3e;
+  --color-brand-hover: #cf1534;
+  --color-brand-light: #fff0f2;
+  --color-brand-border: #ffd8de;
+  --color-brand-mid: #f2889a;
+  --color-brand-soft: #f9c9d1;
+  --color-brand-faint: #fde7eb;
+
+  --color-frame: #edf0f5;
+  --color-subtle: #f7f9fb;
+  --color-pill: #f0f3f7;
+
+  --color-ink: #171b22;
+  --color-body: #3c4350;
+  --color-muted: #6f7887;
+  --color-faint: #9ea8b8;
+
+  --color-line: #e6eaf0;
+  --color-line-subtle: #f0f3f7;
+
+  --color-ok: #059669;
+  --color-ok-bg: #ecfdf5;
+  --color-warn: #d97706;
+  --color-warn-bg: #fffbeb;
+  --color-info: #2563eb;
+  --color-info-bg: #eff6ff;
+
+  --radius-outer: 26px;
+  --radius-card: 16px;
+  --radius-inner: 12px;
+
+  --shadow-canvas: 0 8px 32px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.03);
+  --shadow-glow: 0 4px 12px rgba(234, 29, 62, 0.22);
+
+  --ease-salida: cubic-bezier(0.22, 1, 0.36, 1);
+  /* La transición de página sólo anima opacidad: un transform haría que los Drawer (fixed) se ubiquen respecto a la página. */
+  --animate-pagina: aparecer 260ms ease-out backwards;
+  --animate-entrada: entrada 320ms var(--ease-salida) backwards;
+  --animate-aparecer: aparecer 180ms ease-out backwards;
+  --animate-crecer: crecer 520ms var(--ease-salida) both;
+  --animate-deslizar: deslizar 240ms var(--ease-salida) both;
+  --animate-revelar: revelar 650ms var(--ease-salida) both;
+  --animate-crecer-x: crecer-x 520ms var(--ease-salida) both;
+
+  @keyframes crecer {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+  /* La curva de las gráficas se revela de izquierda a derecha (rect de un clipPath). */
+  @keyframes crecer-x {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes revelar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes deslizar {
+    from { transform: translateX(-100%); }
+    to { transform: none; }
+  }
+
+  @keyframes entrada {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes aparecer {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-frame text-ink antialiased;
+    font-size: 13.5px;
+  }
+  button:not(:disabled), [role="button"] { cursor: pointer; }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+  font-size: 17px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1920px) {
+  body { font-size: 14px; }
+  .app-shell { max-width: 1840px; grid-template-columns: 240px minmax(0, 1fr); gap: 20px; }
+  .app-canvas { padding: 36px 48px 52px; }
+}
+
+@media (min-width: 2560px) {
+  #root { zoom: 1.3333; }
+}
+
+@media (min-width: 3840px) {
+  #root { zoom: 2; }
+}
+
+@media (min-aspect-ratio: 21/9) and (min-width: 2560px) {
+  .app-shell { max-width: none; grid-template-columns: 260px minmax(0, 1fr); }
+  .app-canvas { padding-inline: 64px; }
+}
+
+@media (min-aspect-ratio: 21/9) and (min-width: 2560px) and (max-height: 1200px) {
+  #root { zoom: 1; }
+}
+
+/* Impresión del reporte ejecutivo (Descargar PDF) */
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-full { box-shadow: none !important; border-radius: 0 !important; padding: 0 !important; }
+}
+
+.animate-revelar { transform-box: fill-box; transform-origin: left; }
